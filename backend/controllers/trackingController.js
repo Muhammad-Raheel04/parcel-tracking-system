@@ -2,7 +2,7 @@ export const getTrackingData = async (req, res) => {
     try {
         const { tracking_number, courier_code } = req.body;
         if (!tracking_number || !courier_code) {
-            return res.status(400).json().json({
+            return res.status(400).json({
                 success: false,
                 message: 'trackingId and courierCode are required',
             })
