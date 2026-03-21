@@ -9,6 +9,8 @@ A full-stack parcel tracking web application that lets users track shipments in 
 ---
 
 ## Demo
+> **Note:** The live demo may be unavailable as the TrackingMore API free tier key expires after 2 weeks.
+> To see the app in action, watch the demo video below.
 
 [![Demo](https://res.cloudinary.com/dxdywv9xl/video/upload/so_2/v1774096726/parcel_tracking_system_omylga.jpg)](https://res.cloudinary.com/dxdywv9xl/video/upload/v1774096726/parcel_tracking_system_omylga.mp4)
 ---
