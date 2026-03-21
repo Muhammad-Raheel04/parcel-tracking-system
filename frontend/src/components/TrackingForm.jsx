@@ -1,35 +1,20 @@
 import { Search, Loader2, Package } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchCouriers } from '../api'
+import { useCouriers } from '../hooks/useCouriers';
 
 const TrackingForm = ({ onSearch, loading }) => {
-    const [couriers, setCouriers] = useState([]);
+    const {couriers, loading:fetchingCouriers,error:couriersError} = useCouriers();
     const [trackingId, setTrackingId] = useState("");
     const [courier, setCourier] = useState("");
-    const [fetchingCouriers, setFetchingCouriers] = useState(false);
-
-    const getCouriers = async () => {
-        setFetchingCouriers(true);
-        try {
-            const data = await fetchCouriers();
-            setCouriers(data);
-            const defaultCourier = data.find(c => c.courier_code === "pakistan-post");
-
-            if (defaultCourier) {
-                setCourier(defaultCourier.courier_code);
-            } else if (data.length > 0) {
-                setCourier(data[0].courier_code); // fallback
-            }
-        } catch (error) {
-            console.error('Error fetching couriers:', error);
-        } finally {
-            setFetchingCouriers(false);
-        }
-    };
 
     useEffect(() => {
-        getCouriers();
-    }, []);
+        if(couriers.length===0){
+            return;
+        }
+        const defaultCourier=couriers.find(c=>c.courier_code==='pakistan-post');
+        setCourier(defaultCourier?.courier_code?? couriers[0].courier_code);
+    }, [couriers]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -77,15 +62,15 @@ const TrackingForm = ({ onSearch, loading }) => {
                                 disabled={fetchingCouriers}
                                 required
                             >
-                                {fetchingCouriers ? (
-                                    <option>Loading couriers...</option>
-                                ) : (
-                                    couriers.map((c) => (
-                                        <option key={c.courier_code} value={c.courier_code}>
-                                            {c.courier_name}
-                                        </option>
-                                    ))
-                                )}
+                               {fetchingCouriers?(
+                                <option>Loading couriers...</option>
+                               ):couriersError?(
+                               <option>Failed to load couriers</option>
+                            ):(couriers.map((c)=>(
+                                <option key={c?.courier_code} value={c?.courier_code}>
+                                    {c?.courier_name}
+                                </option>
+                            )))}
                             </select>
                             <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
                                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
