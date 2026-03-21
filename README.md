@@ -10,8 +10,7 @@ A full-stack parcel tracking web application that lets users track shipments in 
 
 ## Demo
 
-[![Parcel Tracking System Demo](https://res.cloudinary.com/dxdywv9xl/video/upload/v1774096726/parcel_tracking_system_omylga.mp4)]
-
+[![Demo](https://res.cloudinary.com/dxdywv9xl/video/upload/so_2/v1774096726/parcel_tracking_system_omylga.jpg)](https://res.cloudinary.com/dxdywv9xl/video/upload/v1774096726/parcel_tracking_system_omylga.mp4)
 ---
 
 ## Features
