@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import couriersRoute from './routes/couriersRoute.js'
 import trackingRoute from './routes/trackingRoute.js'
+import { globalLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
 }))
+app.use(globalLimiter);
 app.use('/api/v1/couriers',couriersRoute)
 app.use('/api/v1/trackings',trackingRoute);
 
